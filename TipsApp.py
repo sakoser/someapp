@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import pandas as pd
 import numpy as np
+import matplotlib as plt
 import matplotlib.pyplot as plt 
 import seaborn as sns
 from datetime import datetime, timedelta
@@ -57,7 +58,17 @@ st.write("""
 ### Последний из более менее удачных""")
 #fig4, ax4 = plt.subplots()
 fig = sns.jointplot(data = tips, x = "total_bill", y ="tip", hue ="size")
-plt.title("Отношение суммы чаевых к сумме заказа, а так же плотность распредления по количесту посетителей за заказ\n\n\n\n\n")
+plt.title("Отношение суммы чаевых к сумме заказа, а так же количество позиций в заказе\n\n\n\n\n")
 plt.xlabel("Сумма заказа")
 plt.ylabel("Чаевые")
 st.pyplot(fig)
+
+st.write('## Пробую встроенные фукнции')
+st.write('### Связь между днем недели и размером счета')
+st.bar_chart(data=tips, x='day', y='total_bill')
+st.write('### Связь между чаевыми и суммой заказа')
+st.line_chart(data=tips, y='tip', x ='total_bill', color = '#F0000F')
+st.write('### В какой из дней было больше чаевых?')
+st.bar_chart(data = tips, x = "time_order", y = 'tip', color = '#F00FFF')
+st.write('### В какой из дней больше заказывали и на какую сумму?')
+st.scatter_chart(data = tips, x = "time_order", y = 'total_bill', color = '#0000FF')
